@@ -2,62 +2,206 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>DayFlow</title>
 
-    <link rel="stylesheet" href="css/style.css">
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
 </head>
 
 <body>
 
-<div class="app">
+<div class="app-shell">
 
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
+    <!-- ===================================== -->
+    <!-- AI SIDEBAR -->
+    <!-- ===================================== -->
 
-        <div class="brand">
-            <div class="brand-icon">D</div>
+    <aside class="ai-sidebar">
 
-            <div>
-                <h2>DayFlow</h2>
-                <span>Life, organized.</span>
-            </div>
-        </div>
+        <div class="sidebar-top">
 
-        <nav>
+            <div class="brand-row">
 
-            <button class="nav-item active">
-                <span>⌂</span>
-                Today
-            </button>
-
-            <button class="nav-item">
-                <span>✦</span>
-                Assistant
-            </button>
-
-            <button class="nav-item">
-                <span>✓</span>
-                Tasks
-            </button>
-
-            <button class="nav-item">
-                <span>▦</span>
-                Schedule
-            </button>
-
-        </nav>
-
-        <div class="sidebar-bottom">
-
-            <div class="server-status">
-                <span id="status-dot"></span>
+                <div class="brand-icon">
+                    ✦
+                </div>
 
                 <div>
-                    <strong>System</strong>
-                    <p id="server-status">Connecting...</p>
+                    <h1>DayFlow</h1>
+                    <p>Your day, figured out.</p>
                 </div>
+
+            </div>
+
+
+            <div class="backend-status">
+
+                <span
+                    class="status-dot"
+                    id="status-dot"
+                ></span>
+
+                <span id="server-status">
+                    Connecting...
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="assistant-intro">
+
+            <span class="eyebrow">
+                AI PLANNER
+            </span>
+
+            <h2>
+                A little structure.<br>
+                A lot more breathing room.
+            </h2>
+
+            <p>
+                Tell me what's going on.
+                Classes, work, assignments,
+                meetings — messy is fine.
+            </p>
+
+        </div>
+
+
+        <!-- CHAT -->
+
+        <div
+            class="chat-area"
+            id="chat-area"
+        >
+
+            <div class="chat-message assistant-message">
+
+                <div class="assistant-avatar">
+                    ✦
+                </div>
+
+                <div class="chat-bubble">
+
+                    <p>
+                        Hey 👋 What does your week
+                        look like?
+                    </p>
+
+                    <p>
+                        You can add things manually
+                        below, or just tell me what's
+                        going on.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- QUICK ADD -->
+
+        <div class="quick-add">
+
+            <span class="section-label">
+                QUICK ADD
+            </span>
+
+
+            <button
+                class="quick-button"
+                data-quick-type="Class"
+            >
+                <span class="quick-icon class-icon">
+                    🎓
+                </span>
+
+                <span>Add a class</span>
+
+                <span class="plus">+</span>
+            </button>
+
+
+            <button
+                class="quick-button"
+                data-quick-type="Work"
+            >
+                <span class="quick-icon work-icon">
+                    💼
+                </span>
+
+                <span>Add a work shift</span>
+
+                <span class="plus">+</span>
+            </button>
+
+
+            <button
+                class="quick-button"
+                data-quick-type="Study"
+            >
+                <span class="quick-icon study-icon">
+                    📚
+                </span>
+
+                <span>Add study time</span>
+
+                <span class="plus">+</span>
+            </button>
+
+
+            <button
+                class="quick-button"
+                data-quick-type="Personal"
+            >
+                <span class="quick-icon personal-icon">
+                    ✨
+                </span>
+
+                <span>Add personal time</span>
+
+                <span class="plus">+</span>
+            </button>
+
+        </div>
+
+
+        <!-- CHAT INPUT -->
+
+        <div class="chat-composer">
+
+            <textarea
+                id="chat-input"
+                placeholder="Ex: I work Monday 2–6 and my database project is due Tuesday..."
+                rows="3"
+            ></textarea>
+
+
+            <div class="composer-bottom">
+
+                <span>
+                    Shift + Enter for a new line
+                </span>
+
+                <button
+                    id="send-chat"
+                    aria-label="Send message"
+                >
+                    ➤
+                </button>
+
             </div>
 
         </div>
@@ -65,72 +209,124 @@
     </aside>
 
 
-    <!-- MAIN CONTENT -->
-    <main class="main">
 
-        <header>
+    <!-- ===================================== -->
+    <!-- MAIN WORKSPACE -->
+    <!-- ===================================== -->
+
+    <main class="workspace">
+
+        <!-- TOP BAR -->
+
+        <header class="topbar">
 
             <div>
-                <p class="eyebrow">SATURDAY</p>
-                <h1>Good afternoon 👋</h1>
-                <p class="subtitle">
-                    Let's figure out what your day actually needs.
-                </p>
-            </div>
 
-            <button class="plan-button">
-                ✦ Plan my day
-            </button>
+                <span
+                    class="eyebrow"
+                    id="today-label"
+                >
+                    YOUR WEEK
+                </span>
 
-        </header>
-
-
-        <!-- DASHBOARD -->
-
-        <section class="dashboard">
-
-            <div class="card focus-card">
-
-                <div class="card-heading">
-                    <div>
-                        <span class="card-label">TODAY'S FOCUS</span>
-                        <h2>Your day is wide open.</h2>
-                    </div>
-                </div>
+                <h2 id="greeting">
+                    Good afternoon 👋
+                </h2>
 
                 <p>
-                    Tell DayFlow what's going on and we'll help you
-                    turn everything into a realistic plan.
+                    Build around the things that
+                    can't move.
                 </p>
 
-                <button id="start-planning">
-                    Start planning →
+            </div>
+
+
+            <div class="topbar-actions">
+
+                <button
+                    class="secondary-button"
+                    id="today-button"
+                >
+                    Today
+                </button>
+
+                <button
+                    class="primary-button"
+                    id="plan-day-button"
+                >
+                    <span>✦</span>
+                    Plan my day
                 </button>
 
             </div>
 
+        </header>
 
-            <div class="card stats-card">
 
-                <span class="card-label">TODAY</span>
 
-                <div class="stats">
+        <!-- WEEK SUMMARY -->
 
-                    <div>
-                        <strong>0</strong>
-                        <span>Tasks</span>
-                    </div>
+        <section class="summary-row">
 
-                    <div>
-                        <strong>0h</strong>
-                        <span>Planned</span>
-                    </div>
+            <div class="summary-card">
 
-                    <div>
-                        <strong>0</strong>
-                        <span>Events</span>
-                    </div>
+                <span class="summary-icon purple">
+                    ✓
+                </span>
 
+                <div>
+                    <span>Open tasks</span>
+                    <strong id="open-task-count">
+                        0
+                    </strong>
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <span class="summary-icon green">
+                    ◷
+                </span>
+
+                <div>
+                    <span>To schedule</span>
+                    <strong id="workload-total">
+                        0h
+                    </strong>
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <span class="summary-icon orange">
+                    ▦
+                </span>
+
+                <div>
+                    <span>Fixed blocks</span>
+                    <strong id="block-count">
+                        0
+                    </strong>
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <span class="summary-icon blue">
+                    ⚡
+                </span>
+
+                <div>
+                    <span>Finished</span>
+                    <strong id="completed-count">
+                        0
+                    </strong>
                 </div>
 
             </div>
@@ -138,72 +334,228 @@
         </section>
 
 
-        <!-- AI ASSISTANT -->
 
-        <section class="assistant-card">
+        <!-- ================================= -->
+        <!-- WEEKLY CALENDAR -->
+        <!-- ================================= -->
 
-            <div class="assistant-header">
+        <section class="calendar-card">
 
-                <div class="assistant-avatar">
-                    ✦
-                </div>
+            <div class="calendar-toolbar">
 
                 <div>
-                    <h3>Planning Assistant</h3>
-                    <span>Let's understand your day first.</span>
+
+                    <div class="calendar-title-row">
+
+                        <span class="calendar-title-icon">
+                            ▦
+                        </span>
+
+                        <h3>
+                            Weekly routine
+                        </h3>
+
+                        <span class="live-badge">
+                            LIVE
+                        </span>
+
+                    </div>
+
+                    <p id="week-range">
+                        This week
+                    </p>
+
+                </div>
+
+
+                <div class="calendar-actions">
+
+                    <button
+                        class="icon-button"
+                        id="previous-week"
+                        title="Previous week"
+                    >
+                        ‹
+                    </button>
+
+                    <button
+                        class="icon-button"
+                        id="next-week"
+                        title="Next week"
+                    >
+                        ›
+                    </button>
+
+                    <button
+                        class="add-block-button"
+                        id="add-block-button"
+                    >
+                        + Add block
+                    </button>
+
                 </div>
 
             </div>
 
 
-            <div class="conversation" id="conversation">
+            <!-- DAY HEADERS -->
 
-                <div class="message assistant-message">
-
-                    <p>
-                        Before I build your schedule, what are you
-                        currently balancing?
-                    </p>
-
-                    <span class="hint">
-                        Select everything that applies.
-                    </span>
+            <div
+                class="calendar-header"
+                id="calendar-header"
+            >
+            </div>
 
 
-                    <div class="options">
+            <!-- CALENDAR BODY -->
 
-                        <button class="option" data-value="School">
-                            🎓 School
-                        </button>
+            <div class="calendar-scroll">
 
-                        <button class="option" data-value="Work">
-                            💼 Work
-                        </button>
+                <div
+                    class="calendar-grid"
+                    id="calendar-grid"
+                >
+                </div>
 
-                        <button class="option" data-value="Clubs">
-                            👥 Clubs / Organizations
-                        </button>
+            </div>
 
-                        <button class="option" data-value="Personal">
-                            🏠 Personal
-                        </button>
 
-                        <button class="option" data-value="Fitness">
-                            🏃 Fitness
-                        </button>
+            <!-- LEGEND -->
 
-                        <button class="option" data-value="Other">
-                            + Other
-                        </button>
+            <div class="calendar-legend">
+
+                <span>
+                    <i class="legend-class"></i>
+                    Class
+                </span>
+
+                <span>
+                    <i class="legend-work"></i>
+                    Work
+                </span>
+
+                <span>
+                    <i class="legend-study"></i>
+                    Study
+                </span>
+
+                <span>
+                    <i class="legend-personal"></i>
+                    Personal
+                </span>
+
+                <span>
+                    <i class="legend-ai"></i>
+                    AI planned
+                </span>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================================= -->
+        <!-- BOTTOM GRID -->
+        <!-- ================================= -->
+
+        <section class="bottom-grid">
+
+            <!-- TASKS -->
+
+            <div class="tasks-card">
+
+                <div class="card-heading">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            YOUR WORKLOAD
+                        </span>
+
+                        <h3>
+                            Tasks
+                            <span
+                                class="count-badge"
+                                id="task-count-badge"
+                            >
+                                0
+                            </span>
+                        </h3>
 
                     </div>
 
 
-                    <button id="continue-button" disabled>
-                        Continue
+                    <button
+                        class="text-button"
+                        id="add-task-button"
+                    >
+                        + Add task
                     </button>
 
                 </div>
+
+
+                <div
+                    class="task-list"
+                    id="task-list"
+                >
+                </div>
+
+            </div>
+
+
+
+            <!-- PLAN INSIGHT -->
+
+            <div class="insight-card">
+
+                <div class="insight-sun">
+                    ☀
+                </div>
+
+                <span class="eyebrow">
+                    DAYFLOW INSIGHT
+                </span>
+
+                <h3 id="insight-title">
+                    A plan that leaves space.
+                </h3>
+
+                <p id="insight-description">
+                    Add your commitments and tasks.
+                    DayFlow will build focus time
+                    around the things that can't move.
+                </p>
+
+
+                <div class="insight-stat">
+
+                    <div>
+                        <span>Focus blocks</span>
+
+                        <strong id="focus-block-count">
+                            0
+                        </strong>
+                    </div>
+
+                    <div>
+                        <span>Planned</span>
+
+                        <strong id="planned-time">
+                            0h
+                        </strong>
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="insight-button"
+                    id="insight-plan-button"
+                >
+                    ✦ Build my plan
+                </button>
 
             </div>
 
@@ -212,6 +564,414 @@
     </main>
 
 </div>
+
+
+
+<!-- ===================================== -->
+<!-- BLOCK MODAL -->
+<!-- ===================================== -->
+
+<div
+    class="modal-overlay hidden"
+    id="block-modal"
+>
+
+    <div class="modal">
+
+        <div class="modal-header">
+
+            <div>
+
+                <span class="eyebrow">
+                    FIXED COMMITMENT
+                </span>
+
+                <h2>
+                    Add something to your week
+                </h2>
+
+            </div>
+
+
+            <button
+                class="modal-close"
+                id="close-block-modal"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="block-title">
+                What is it?
+            </label>
+
+            <input
+                id="block-title"
+                type="text"
+                placeholder="Ex: Economics class"
+            >
+
+        </div>
+
+
+        <div class="form-row">
+
+            <div class="form-group">
+
+                <label for="block-type">
+                    Type
+                </label>
+
+                <select id="block-type">
+
+                    <option value="Class">
+                        🎓 Class
+                    </option>
+
+                    <option value="Work">
+                        💼 Work
+                    </option>
+
+                    <option value="Study">
+                        📚 Study
+                    </option>
+
+                    <option value="Personal">
+                        ✨ Personal
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="block-day">
+                    Day
+                </label>
+
+                <select id="block-day">
+
+                    <option value="0">
+                        Monday
+                    </option>
+
+                    <option value="1">
+                        Tuesday
+                    </option>
+
+                    <option value="2">
+                        Wednesday
+                    </option>
+
+                    <option value="3">
+                        Thursday
+                    </option>
+
+                    <option value="4">
+                        Friday
+                    </option>
+
+                    <option value="5">
+                        Saturday
+                    </option>
+
+                    <option value="6">
+                        Sunday
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <div class="form-row">
+
+            <div class="form-group">
+
+                <label for="block-start">
+                    Starts
+                </label>
+
+                <input
+                    id="block-start"
+                    type="time"
+                    value="09:00"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="block-end">
+                    Ends
+                </label>
+
+                <input
+                    id="block-end"
+                    type="time"
+                    value="10:00"
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="modal-note">
+            🔒 Fixed commitments won't be moved
+            when DayFlow builds your plan.
+        </div>
+
+
+        <div class="modal-actions">
+
+            <button
+                class="secondary-button"
+                id="cancel-block"
+            >
+                Cancel
+            </button>
+
+            <button
+                class="primary-button"
+                id="save-block"
+            >
+                Add to calendar
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ===================================== -->
+<!-- TASK MODAL -->
+<!-- ===================================== -->
+
+<div
+    class="modal-overlay hidden"
+    id="task-modal"
+>
+
+    <div class="modal">
+
+        <div class="modal-header">
+
+            <div>
+
+                <span class="eyebrow">
+                    FLEXIBLE TASK
+                </span>
+
+                <h2>
+                    What needs to get done?
+                </h2>
+
+            </div>
+
+
+            <button
+                class="modal-close"
+                id="close-task-modal"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="task-title">
+                Task
+            </label>
+
+            <input
+                id="task-title"
+                type="text"
+                placeholder="Ex: Finish database assignment"
+            >
+
+        </div>
+
+
+        <div class="form-row">
+
+            <div class="form-group">
+
+                <label for="task-category">
+                    Part of
+                </label>
+
+                <select id="task-category">
+
+                    <option value="School">
+                        🎓 School
+                    </option>
+
+                    <option value="Work">
+                        💼 Work
+                    </option>
+
+                    <option value="Personal">
+                        🏠 Personal
+                    </option>
+
+                    <option value="Clubs">
+                        👥 Clubs
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="task-date">
+                    Due
+                </label>
+
+                <input
+                    id="task-date"
+                    type="date"
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="form-row">
+
+            <div class="form-group">
+
+                <label for="task-duration">
+                    Estimated time
+                </label>
+
+                <select id="task-duration">
+
+                    <option value="30">
+                        30 minutes
+                    </option>
+
+                    <option value="60">
+                        1 hour
+                    </option>
+
+                    <option value="90">
+                        1.5 hours
+                    </option>
+
+                    <option value="120">
+                        2 hours
+                    </option>
+
+                    <option value="180">
+                        3 hours
+                    </option>
+
+                    <option value="240">
+                        4 hours
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="task-priority">
+                    Priority
+                </label>
+
+                <select id="task-priority">
+
+                    <option value="low">
+                        🟢 Low
+                    </option>
+
+                    <option
+                        value="medium"
+                        selected
+                    >
+                        🟡 Medium
+                    </option>
+
+                    <option value="high">
+                        🔴 High
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <div class="modal-note">
+            ✦ Flexible tasks can be placed into
+            open time by the planner.
+        </div>
+
+
+        <div class="modal-actions">
+
+            <button
+                class="secondary-button"
+                id="cancel-task"
+            >
+                Cancel
+            </button>
+
+            <button
+                class="primary-button"
+                id="save-task"
+            >
+                Add task
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ===================================== -->
+<!-- TOAST -->
+<!-- ===================================== -->
+
+<div
+    class="toast"
+    id="toast"
+>
+
+    <span id="toast-icon">
+        ✓
+    </span>
+
+    <span id="toast-message">
+        Saved
+    </span>
+
+</div>
+
 
 <script src="js/app.js"></script>
 
